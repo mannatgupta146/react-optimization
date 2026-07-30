@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import { createBrowserRouter, RouterProvider } from "react-router"
 import MainLayout from '../layout/MainLayout'
-import Home from '../pages/Home'
-import About from '../pages/About'
-import Product from '../pages/Product'
-import Users from '../pages/Users'
+import Skeleton from '../component/Skeleton'
+const Home = lazy(() => import('../pages/Home'))
+const About = lazy(() => import('../pages/About'))
+const Product = lazy(() => import('../pages/Product'))
+const Users = lazy(() => import('../pages/Users'))
 
 const router = createBrowserRouter([
     {
@@ -13,19 +14,19 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Home />
+                element: <Suspense fallback={<div>Loading...</div>}><Home /></Suspense>
             },
             {
                 path: "about",
-                element: <About />
+                element: <Suspense fallback={<div>Loading...</div>}><About /></Suspense>
             },
             {
                 path: "product",
-                element: <Product />
+                element: <Suspense fallback={<div>Loading...</div>}><Product /></Suspense>
             },
             {
                 path: "users",
-                element: <Users />
+                element: <Suspense fallback={<div className='flex gap-4 p-4'><Skeleton /> <Skeleton /> <Skeleton /></div>}><Users /></Suspense>
             }
         ]
     },
