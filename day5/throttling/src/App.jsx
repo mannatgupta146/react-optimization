@@ -1,28 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 const App = () => {
 
-  const [search, setSearch] = useState('')
+  let lastClicked = 0
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      console.log("api calling => ", search)
-    }, 5000)
+  const onClickedFn = () => {
+    const date = Date.now()
+    console.log(date)
 
-    return ()=> {
-      clearTimeout(timer)
+    if(date - lastClicked >= 2000) {
+      console.log("api calling =>")
+      lastClicked = date
     }
-  }, [search])
-  
+  }
 
   return (
-    <div>
-      <input 
-        className='m-4 p-2 border rounded-lg' 
-        onChange={(e)=> { setSearch(e.target.value)}} 
-        type="text"
-        placeholder='search'
-      />
+    <div className='p-4'>
+      <button onClick={onClickedFn} className="btn px-2 py-1 bg-blue-300 rounded-md cursor-pointer">Button</button>
     </div>
   )
 }
