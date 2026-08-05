@@ -6,6 +6,7 @@ const App = () => {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["users"],
     queryFn: fetchUsers,
+    staleTime: 1000 * 60 * 5, // 5 minutes
   });
 
   if (isLoading) return <h1>Loading...</h1>;
